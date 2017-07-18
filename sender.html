@@ -1,0 +1,45 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Sender for PhotoBackup</title>
+        <meta name="description" content="tabellaintestata">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--link rel="apple-touch-icon" href="/apple-touch-icon.png"-->
+
+        <!--link rel="stylesheet" href="/css/bootstrap.min.css"-->
+		
+		<style>
+body {
+	margin: 8px;
+}
+		</style>
+        <!--link rel="stylesheet" href="/css/bootstrap-theme.min.css"-->
+        <!--link rel="stylesheet" href="/css/main.css"-->
+
+        <!--script src="/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script-->
+		
+		<!-- https://github.com/emn178/js-sha512 -->
+        <script src="js-sha512/build/sha512.min.js"></script>
+		
+	</head>
+<body>
+<h2>Send Test Page for PhotoBackup</h2>
+<p>Server address: <input type="url" name="url" id="url" value="http://192.168.0.1/upload/index.asp?" size=60 onchange="void(0);"></p>
+<p><i>With ASP, you must use something like: http://192.168.0.1/upload/index.asp? <br> with "?" at the end for support the test case "?/test" on client app.</i></p>
+
+<p>Password: <input type="text" id="passwordclear" name="passwordclear" placeholder="password" onchange="document.getElementById('password').value = sha512(document.getElementById('passwordclear').value)"></p>
+
+<form id="frmUpload" target="UploadWindow" enctype="multipart/form-data" action="" method="post"> <!--  -->
+	<input type="file" name="upfile" id="upfile" onchange="document.getElementById('filesize').value = document.getElementById('upfile').files[0].size;" >
+	<br>Encrypted Password: <input type="text" id="password" name="password" placeholder="password" disabled value="" size="100%">
+	<br>Filesize: <input type="text" id="filesize" name="filesize" placeholder="filesize" disabled value="">
+	<br><input type="submit" value="Load" onclick="document.getElementById('frmUpload').action = document.getElementById('url').value; document.getElementById('password').value = sha512(document.getElementById('passwordclear').value); console.log('fields calculated')">
+</form>
+<br>
+<iframe name="UploadWindow" src="javascript:void(0)" width="100%" height="400px"></iframe>
+</body>
